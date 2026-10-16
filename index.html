@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>YouTube · Audi S-Line Edition</title>
+<title>Audi S-Line Edition · YouTube</title>
 <style>
-:root{color-scheme:dark;--bg:#08090b;--card:#151719;--card2:#1c1f22;--border:#34383d;--text:#f5f5f6;--sub:#b7b8bc;--rs:#c63646;--rs2:#e04b5a;--focus:#f3a5ae}
+:root{color-scheme:dark;--bg:#08090b;--card:#151719;--card2:#1c1f22;--border:#34383d;--text:#f5f5f6;--sub:#b7b8bc;--rs:#c63646;--rs2:#e04b5a;--focus:#f3a5ae;--glow:rgba(190,20,40,.24);--glow2:rgba(130,10,25,.12);--active-bg:#281b20;--notice-bg:#20191c}
+:root[data-theme="amg"]{--rs:#244b80;--rs2:#447bb8;--focus:#9cc2f5;--glow:rgba(26,76,153,.28);--glow2:rgba(12,35,80,.14);--active-bg:#17263a;--notice-bg:#151d2a}
 *{box-sizing:border-box}
-body{margin:0;background:linear-gradient(180deg,#09090b,#121315);font:16px system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text)}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 50%,var(--glow) 0%,var(--glow2) 36%,transparent 73%),#090909;background-attachment:fixed;font:16px system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text)}
 main{max-width:980px;margin:auto;padding:16px;display:grid;gap:12px}
 header{display:flex;gap:12px;align-items:center;padding:6px 0 2px}
 .brand{display:inline-grid;place-items:center;color:#fff;background:var(--rs);height:42px;width:42px;border-radius:12px;font-size:23px;flex-shrink:0}
@@ -18,46 +19,67 @@ h1{font-size:1.45rem;margin:0}h2{font-size:1.02rem;margin:0}p{margin:0;color:var
 input,button{font:inherit;border-radius:11px;min-height:52px}
 input{min-width:0;flex:1;width:100%;padding:12px;background:#0e1012;color:var(--text);border:1px solid #50545a}
 button{cursor:pointer;background:#24272b;color:var(--text);border:1px solid #51555b;font-weight:750;padding:11px 15px}
-button:hover{border-color:var(--rs2);background:#292326}
+button:hover{border-color:var(--rs2);background:var(--active-bg)}
 button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 button:disabled{opacity:.55;cursor:wait}
-.primary{background:var(--rs);border-color:#de5664;color:#fff}.primary:hover{background:#d43c4b}
-.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.primary{background:var(--rs);border-color:var(--rs2);color:#fff}.primary:hover{background:var(--rs2)}
+/* Controles grandes para la rueda MMI */
+.actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.actions button{min-width:0}
+.actions .wide{grid-column:span 1}
+.theme-switch{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.theme-switch button{min-height:44px;padding:10px 14px;flex:1 1 140px;background:#181a1e;border:1px solid var(--border);color:var(--text)}
+.theme-switch button[aria-pressed="true"]{background:var(--rs);border-color:var(--rs2);color:white}
+.theme-switch button:focus-visible{outline:3px solid var(--focus)}
 .results{display:grid;gap:8px;max-height:350px;overflow:auto;overscroll-behavior:contain}
 .result{display:flex;align-items:center;text-align:left;gap:12px;width:100%;min-width:0;padding:7px;background:var(--card2);overflow:hidden;border:1px solid var(--border);border-radius:10px}
 .result img{display:block;flex:0 0 115px;width:115px;height:65px;max-width:32%;object-fit:cover;border-radius:7px}
 .result .txt{min-width:0;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35;overflow-wrap:anywhere}
-.result.current{border-color:var(--rs2);background:#281b20}
+.result.current{border-color:var(--rs2);background:var(--active-bg)}
 .video{background:#000;aspect-ratio:16/9;position:relative;width:100%;overflow:hidden;border-radius:14px;border:1px solid var(--border)}
 .video #player,.video iframe{height:100%;width:100%;border:0;display:block}
 .placeholder{height:100%;display:grid;place-content:center;text-align:center;gap:7px;color:var(--sub)}
 .placeholder strong{color:var(--text)}
 .status{min-height:1.3em;color:#d5d5da;font-size:.87rem}
 .muted{font-size:.82rem;color:#a9aab0}
-.notice{border-left:3px solid var(--rs);background:#20191c;color:var(--sub);padding:10px;border-radius:6px;font-size:.82rem}
+.notice{border-left:3px solid var(--rs);background:var(--notice-bg);color:var(--sub);padding:10px;border-radius:6px;font-size:.82rem}
 details summary{cursor:pointer;padding:8px 0;font-weight:700}
 #searchPanel[hidden],#backResults[hidden],#playerPanel[hidden]{display:none!important}
 #theater-on.expanded{position:fixed;inset:0;background:#000;z-index:100;display:flex;flex-direction:column;justify-content:center;padding:0}
 #theater-on.expanded .video{width:100vw;height:100vh;height:100dvh;aspect-ratio:auto;border:0;border-radius:0}
 #exitTheater{display:none;position:fixed;right:12px;bottom:12px;z-index:101}
 #theater-on.expanded #exitTheater{display:block}
-@media(max-width:580px){main{padding:11px}.row{flex-direction:column}.result img{flex-basis:95px;width:95px;height:56px}button{font-size:.91rem}.actions{gap:7px}}
- body {
-  background:
-    radial-gradient(
-      ellipse at 75% 35%,
-      rgba(185, 28, 45, 0.18) 0%,
-      rgba(100, 10, 20, 0.07) 35%,
-      transparent 70%
-    ),
-    #090909;
-  background-attachment: fixed;
-}
+@media(max-width:580px){main{padding:11px}.row{flex-direction:column}.result img{flex-basis:95px;width:95px;height:56px}button{font-size:.91rem}.actions{gap:7px}.actions{grid-template-columns:repeat(3,minmax(0,1fr))}.actions button{padding:8px 5px;font-size:.75rem}}
+
+/* Efectos Audi S-Line / AMG: selección MMI, brillo y pulsación */
+:root{--aura:rgba(198,54,70,.28);--aura-strong:rgba(198,54,70,.43)}
+:root[data-theme="amg"]{--aura:rgba(68,123,184,.28);--aura-strong:rgba(68,123,184,.45)}
+button,summary{position:relative;isolation:isolate;overflow:hidden;transition:transform .17s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease,border-color .22s ease,background-color .22s ease,filter .22s ease}
+button::before,summary::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(115deg,transparent 15%,rgba(255,255,255,.11) 49%,transparent 82%);transform:translateX(-115%);transition:transform .48s ease}
+button:hover:not(:disabled),summary:hover{transform:translateY(-2px);border-color:var(--rs2);box-shadow:0 0 0 1px var(--aura),0 0 21px var(--aura),0 7px 18px rgba(0,0,0,.27)}
+button:hover:not(:disabled)::before,summary:hover::before{transform:translateX(115%)}
+/* El navegador del coche suele marcar :focus aunque no active :focus-visible */
+button:focus:not(:disabled),summary:focus{border-color:var(--focus);box-shadow:0 0 0 2px var(--rs),0 0 0 5px rgba(255,255,255,.08),0 0 27px var(--aura-strong)}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+button:active:not(:disabled),button.is-pressing:not(:disabled){transform:translateY(1px) scale(.965);filter:brightness(1.25);box-shadow:inset 0 2px 9px rgba(0,0,0,.3),0 0 20px var(--aura-strong)}
+button:disabled{transform:none!important;box-shadow:none!important}
+.theme-switch button[aria-pressed="true"]{box-shadow:0 0 0 1px var(--aura),0 0 19px var(--aura)}
+.result{transition:transform .17s ease,box-shadow .22s ease,border-color .22s ease}
+.result:hover img,.result:focus img{filter:brightness(1.1) saturate(1.1)}
+.result img{transition:filter .2s ease}
+button .touch-ripple{position:absolute;z-index:2;border-radius:50%;pointer-events:none;width:16px;height:16px;background:rgba(255,255,255,.36);transform:translate(-50%,-50%) scale(0);animation:touch-ripple .5s ease-out forwards}
+@keyframes touch-ripple{to{opacity:0;transform:translate(-50%,-50%) scale(12)}}
+input:focus{border-color:var(--rs2);box-shadow:0 0 0 2px var(--aura),0 0 15px var(--aura);outline:none}
+@media(prefers-reduced-motion:reduce){button,summary,.result,.result img,button::before{transition:none!important}button .touch-ripple{animation:none!important;display:none}button:hover,summary:hover{transform:none!important}}
 </style>
 </head>
 <body>
 <main>
-<header><span class="brand" aria-hidden="true">▶</span><div><h1>YouTube · Audi S-Line Edition</h1><p>Controles sencillos papi</p></div></header>
+<header><span class="brand" aria-hidden="true">▶</span><div><h1 id="pageTitle">Audi S-Line Edition</h1><p>Vídeos con controles sencillos para la rueda MMI</p></div></header>
+<nav class="theme-switch" aria-label="Elegir modo visual">
+<button type="button" id="themeAudi" aria-pressed="true">🔴 AUDI S-LINE</button>
+<button type="button" id="themeAmg" aria-pressed="false">🔵 AMG EDITION</button>
+</nav>
 <section class="panel" id="searchPanel">
 <h2>⌕ Buscar vídeos o canciones</h2>
 <div class="row"><input id="query" type="search" placeholder="Ej.: Hades66 visualizer" aria-label="Buscar vídeos"><button id="search" class="primary">BUSCAR</button></div>
@@ -66,7 +88,7 @@ details summary{cursor:pointer;padding:8px 0;font-weight:700}
 <button id="backResults" hidden>☰ VER RESULTADOS DE BÚSQUEDA</button>
 <section id="playerPanel" class="panel" hidden>
 <div id="theater-on"><div id="video" class="video"><div id="player"></div></div><button id="exitTheater">✕ SALIR DE VISTA AMPLIADA</button></div>
-<div class="actions"><button id="prev">⏮ ANTERIOR</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AMPLIAR VÍDEO</button></div>
+<div class="actions"><button id="prev">⏮ ANTERIOR</button><button id="pause" aria-label="Pausar o reanudar vídeo">⏯ PAUSA / PLAY</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AMPLIAR VÍDEO</button><button id="backToSearch">⌕ BUSCAR</button></div>
 </section>
 <p id="status" class="status" role="status">Busca un vídeo para empezar.</p>
 <details><summary>🔗 Abrir un enlace de YouTube directamente</summary><div class="panel"><div class="row"><input id="url" placeholder="https://youtu.be/..." aria-label="Enlace de YouTube"><button id="load">ABRIR</button></div></div></details>
@@ -74,9 +96,41 @@ details summary{cursor:pointer;padding:8px 0;font-weight:700}
 </main>
 <script>
 'use strict';
+
+/* Pulsación visual para ratón, táctil y selección por rueda/teclado */
+document.addEventListener('pointerdown',event=>{
+ const button=event.target.closest('button');
+ if(!button||button.disabled)return;
+ button.classList.add('is-pressing');
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const rect=button.getBoundingClientRect();
+ const ripple=document.createElement('span');ripple.className='touch-ripple';
+ ripple.style.left=(event.clientX-rect.left)+'px';ripple.style.top=(event.clientY-rect.top)+'px';
+ button.appendChild(ripple);ripple.addEventListener('animationend',()=>ripple.remove(),{once:true});
+});
+for(const type of ['pointerup','pointercancel'])document.addEventListener(type,()=>document.querySelectorAll('button.is-pressing').forEach(b=>b.classList.remove('is-pressing')));
+document.addEventListener('keydown',event=>{
+ if(!['Enter',' '].includes(event.key))return;
+ const button=event.target.closest('button');if(button&&!button.disabled)button.classList.add('is-pressing');
+});
+document.addEventListener('keyup',()=>document.querySelectorAll('button.is-pressing').forEach(b=>b.classList.remove('is-pressing')));
+document.addEventListener('blur',()=>document.querySelectorAll('button.is-pressing').forEach(b=>b.classList.remove('is-pressing')),true);
+
 const API_BASE='https://youtube-server-carplay.onrender.com';
 const el=id=>document.getElementById(id);
 let ready=false,player=null,pending=null,currentIndex=-1,videos=[],activeId=null;
+function setTheme(theme){
+ const amg=theme==='amg';document.documentElement.dataset.theme=amg?'amg':'audi';
+ el('themeAudi').setAttribute('aria-pressed',String(!amg));el('themeAmg').setAttribute('aria-pressed',String(amg));
+ const title=amg?'AMG Edition':'Audi S-Line Edition';el('pageTitle').textContent=title;document.title=title+' · YouTube';
+ try{localStorage.setItem('carTheme',amg?'amg':'audi')}catch(e){}
+}
+el('themeAudi').onclick=()=>setTheme('audi');el('themeAmg').onclick=()=>setTheme('amg');
+try{setTheme(localStorage.getItem('carTheme')||'audi')}catch(e){setTheme('audi')}
+function updatePauseButton(state){
+ if(state===1){el('pause').textContent='⏸ PAUSAR';el('pause').setAttribute('aria-label','Pausar vídeo')}
+ else{el('pause').textContent='▶ REANUDAR';el('pause').setAttribute('aria-label','Reanudar vídeo')}
+}
 const setStatus=message=>{el('status').textContent=message};
 function videoId(value){
  value=value.trim();if(/^[\w-]{11}$/.test(value))return value;
@@ -92,7 +146,8 @@ function play(id,index=-1){
  if(!ready){pending={id,index};setStatus('Cargando reproductor de YouTube…');return;}
  if(player&&typeof player.destroy==='function'){try{player.destroy()}catch(e){}}
  el('video').innerHTML='<div id="player"></div>';
- player=new YT.Player('player',{height:'100%',width:'100%',videoId:id,playerVars:{playsinline:1,rel:0,cc_load_policy:0,iv_load_policy:3,origin:location.origin},events:{onReady:()=>setStatus('Vídeo preparado. Pulsa reproducir.'),onError:e=>setStatus('YouTube no permite reproducir este vídeo aquí (error '+e.data+').')}});
+ updatePauseButton(0);
+ player=new YT.Player('player',{height:'100%',width:'100%',videoId:id,playerVars:{playsinline:1,rel:0,cc_load_policy:0,iv_load_policy:3,origin:location.origin},events:{onReady:()=>{setStatus('Vídeo preparado. Pulsa reproducir.');updatePauseButton(player.getPlayerState())},onStateChange:e=>updatePauseButton(e.data),onError:e=>setStatus('YouTube no permite reproducir este vídeo aquí (error '+e.data+').')}});
 }
 function renderVideos(){
  const results=el('results');results.replaceChildren();
@@ -124,6 +179,15 @@ el('search').onclick=searchVideos;
 el('query').addEventListener('keydown',event=>{if(event.key==='Enter')searchVideos()});
 el('backResults').onclick=showResults;
 el('prev').onclick=()=>jump(-1);el('next').onclick=()=>jump(1);
+el('backToSearch').onclick=showResults;
+el('pause').onclick=()=>{
+ if(!player||typeof player.getPlayerState!=='function'){setStatus('Selecciona un vídeo primero.');return}
+ try{
+  const state=player.getPlayerState();
+  if(state===YT.PlayerState.PLAYING){player.pauseVideo();updatePauseButton(2)}
+  else{player.playVideo();updatePauseButton(1)}
+ }catch(e){setStatus('El reproductor no admite este control.')}
+};
 el('load').onclick=()=>{const id=videoId(el('url').value);if(id)play(id);else setStatus('Introduce un enlace válido de YouTube.')};
 el('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(el('video').requestFullscreen)await el('video').requestFullscreen();else setStatus('Este navegador no admite pantalla completa.')}catch(e){setStatus('APTV ha bloqueado pantalla completa. Prueba AMPLIAR VÍDEO.')}};
 el('theater').onclick=()=>el('theater-on').classList.add('expanded');
@@ -133,6 +197,7 @@ const script=document.createElement('script');script.src='https://www.youtube.co
 </script>
 </body>
 </html>
+
 
 </html>
 
