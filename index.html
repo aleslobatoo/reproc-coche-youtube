@@ -1,42 +1,126 @@
-<!doctype html>
+!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Youtube Carplay</title>
+<title>YouTube · Audi S-Line</title>
 <style>
-:root{color-scheme:dark;--bg:#08090b;--panel:#141518;--panel2:#1b1c20;--line:#33353a;--red:#be2637;--red2:#e04a57;--text:#f3f3f5;--sub:#b2b2b9}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 50% -30%,#30151a 0%,#08090b 60%);font:16px system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:960px;margin:auto;padding:18px 16px 40px;display:grid;gap:14px}header{display:flex;align-items:center;gap:12px}header .mark{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid #73303a;border-radius:12px;background:#2c1118;color:#ff7080;font-size:23px}h1{font-size:1.25rem;margin:0}h2{font-size:1rem;margin:0}p{margin:0}.hint,.muted{color:var(--sub);font-size:.87rem}.panel{padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:17px;display:grid;gap:12px;min-width:0}input,button{font:inherit;min-height:52px;border-radius:12px}input{background:#0d0e11;color:var(--text);border:1px solid #61636b;padding:12px 14px;width:100%;min-width:0}input:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #ff6b7e;outline-offset:2px}button{border:1px solid #4c4d53;background:#25262b;color:var(--text);padding:12px 15px;font-weight:700;cursor:pointer}button:hover{border-color:#af5260;background:#352125}button:disabled{opacity:.55;cursor:default}.primary{background:var(--red);border-color:var(--red2);color:white}.primary:hover{background:#d03446}.searchline,.controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.results{display:grid;gap:8px;max-height:330px;overflow-y:auto;overflow-x:hidden;min-width:0;scrollbar-color:#7f303b #18191d;padding:2px}.results[hidden],.panel[hidden]{display:none!important}.result{display:flex;align-items:center;gap:12px;text-align:left;padding:7px;min-width:0;width:100%;max-width:100%;overflow:hidden;min-height:76px;background:#1b1c20;border:1px solid #393a40;border-radius:11px}.result img{display:block;width:116px;max-width:35%;height:65px;flex:0 0 116px;min-width:0;object-fit:cover;border-radius:7px;background:#080808}.result .result-text{min-width:0;flex:1;display:grid;gap:3px}.result strong{font-size:.9rem;font-weight:650;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}.result small{color:var(--sub);font-size:.73rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.result:hover,.result:focus-visible{background:#292025;border-color:var(--red2)}.results-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.video{position:relative;width:100%;aspect-ratio:16/9;background:#050505;border:1px solid #3d3d40;border-radius:12px;overflow:hidden}.video iframe,.video #player{width:100%;height:100%;border:0}.empty{position:absolute;inset:0;display:grid;place-content:center;gap:8px;text-align:center;color:#929298;pointer-events:none}.empty b{color:#ddd}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.controls button{min-width:0}.controls .wide{grid-column:1/-1}.video-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.93rem;min-width:0}.player-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.small{min-height:40px;font-size:.85rem;padding:8px 12px}.status{min-height:1.4em;font-size:.84rem;color:#d7a1a8}details{border-top:1px solid var(--line);padding-top:10px}summary{font-size:.88rem;font-weight:600;cursor:pointer}details .inner{padding-top:12px;display:grid;gap:9px}.notice{border-left:3px solid #7b3540;color:var(--sub);font-size:.79rem;padding:7px 10px;background:#161216;border-radius:5px}
-#theater-on.expanded{position:fixed;z-index:100;inset:0;display:flex;flex-direction:column;gap:8px;padding:8px;background:#080808}#theater-on.expanded .video{flex:1;height:0;aspect-ratio:auto;border:0}#theater-on.expanded .player-top{min-height:48px}#theater-on.expanded #exitTheater{display:block}#exitTheater{display:none}#theater-on.expanded .controls{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:560px){main{padding:12px 9px;gap:10px}.panel{padding:10px}.result img{width:88px;height:52px;flex-basis:88px}.result{min-height:66px}.result strong{font-size:.83rem}.searchline{grid-template-columns:minmax(0,1fr) auto}.searchline button{padding:10px}.controls button{font-size:.86rem;padding:11px 5px}}
+:root{color-scheme:dark;--bg:#08090b;--card:#151719;--card2:#1c1f22;--border:#34383d;--text:#f5f5f6;--sub:#b7b8bc;--rs:#c63646;--rs2:#e04b5a;--focus:#f3a5ae}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#09090b,#121315);font:16px system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text)}
+main{max-width:980px;margin:auto;padding:16px;display:grid;gap:12px}
+header{display:flex;gap:12px;align-items:center;padding:6px 0 2px}
+.brand{display:inline-grid;place-items:center;color:#fff;background:var(--rs);height:42px;width:42px;border-radius:12px;font-size:23px;flex-shrink:0}
+h1{font-size:1.45rem;margin:0}h2{font-size:1.02rem;margin:0}p{margin:0;color:var(--sub);font-size:.89rem}
+.panel{border:1px solid var(--border);background:var(--card);border-radius:16px;padding:14px;display:grid;gap:12px}
+.row{display:flex;gap:10px;min-width:0}
+input,button{font:inherit;border-radius:11px;min-height:52px}
+input{min-width:0;flex:1;width:100%;padding:12px;background:#0e1012;color:var(--text);border:1px solid #50545a}
+button{cursor:pointer;background:#24272b;color:var(--text);border:1px solid #51555b;font-weight:750;padding:11px 15px}
+button:hover{border-color:var(--rs2);background:#292326}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+button:disabled{opacity:.55;cursor:wait}
+.primary{background:var(--rs);border-color:#de5664;color:#fff}.primary:hover{background:#d43c4b}
+.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.results{display:grid;gap:8px;max-height:350px;overflow:auto;overscroll-behavior:contain}
+.result{display:flex;align-items:center;text-align:left;gap:12px;width:100%;min-width:0;padding:7px;background:var(--card2);overflow:hidden;border:1px solid var(--border);border-radius:10px}
+.result img{display:block;flex:0 0 115px;width:115px;height:65px;max-width:32%;object-fit:cover;border-radius:7px}
+.result .txt{min-width:0;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.35;overflow-wrap:anywhere}
+.result.current{border-color:var(--rs2);background:#281b20}
+.video{background:#000;aspect-ratio:16/9;position:relative;width:100%;overflow:hidden;border-radius:14px;border:1px solid var(--border)}
+.video #player,.video iframe{height:100%;width:100%;border:0;display:block}
+.placeholder{height:100%;display:grid;place-content:center;text-align:center;gap:7px;color:var(--sub)}
+.placeholder strong{color:var(--text)}
+.status{min-height:1.3em;color:#d5d5da;font-size:.87rem}
+.muted{font-size:.82rem;color:#a9aab0}
+.notice{border-left:3px solid var(--rs);background:#20191c;color:var(--sub);padding:10px;border-radius:6px;font-size:.82rem}
+details summary{cursor:pointer;padding:8px 0;font-weight:700}
+#searchPanel[hidden],#backResults[hidden],#playerPanel[hidden]{display:none!important}
+#theater-on.expanded{position:fixed;inset:0;background:#000;z-index:100;display:flex;flex-direction:column;justify-content:center;padding:0}
+#theater-on.expanded .video{width:100vw;height:100vh;height:100dvh;aspect-ratio:auto;border:0;border-radius:0}
+#exitTheater{display:none;position:fixed;right:12px;bottom:12px;z-index:101}
+#theater-on.expanded #exitTheater{display:block}
+@media(max-width:580px){main{padding:11px}.row{flex-direction:column}.result img{flex-basis:95px;width:95px;height:56px}button{font-size:.91rem}.actions{gap:7px}}
 </style>
 </head>
-<body><main>
-<header><div class="mark">▶</div><div><h1>YouTube · Audi RS</h1><p class="hint">Interfaz sencilla para MMI · Usar solo con el coche estacionado</p></div></header>
-<section class="panel" id="searchPanel"><h2>⌕ Buscar canciones y vídeos</h2><div class="searchline"><input id="query" type="search" placeholder="Artista, canción o vídeo…" aria-label="Buscar vídeos"><button class="primary" id="search">BUSCAR</button></div><div id="resultsWrap" hidden><div class="results-head"><span class="hint">Resultados de búsqueda</span><button id="hideResults" type="button" class="small">Ocultar</button></div><div id="results" class="results" aria-live="polite"></div></div></section>
-<section class="panel" id="playerPanel"><div id="theater-on"><div class="player-top"><div id="videoTitle" class="video-title">Ningún vídeo seleccionado</div><button id="exitTheater" type="button" class="small">✕ SALIR</button></div><div id="video" class="video"><div class="empty" id="empty"><b>▶ Elige un vídeo</b><span>Los resultados se ocultarán al seleccionarlo</span></div><div id="player"></div></div></div><div class="controls"><button id="prev">⏮ ANTERIOR</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AMPLIAR</button><button id="showResults" class="wide">⌕ VER RESULTADOS / BUSCAR OTRA</button></div><p class="status" id="status" role="status"></p></section>
-<section class="panel"><details><summary>🔗 Abrir enlace de YouTube directamente (opcional)</summary><div class="inner"><div class="searchline"><input id="url" placeholder="https://youtu.be/…" spellcheck="false"><button id="load">ABRIR</button></div></div></details><p class="notice">Anterior y Siguiente utilizan los vídeos de la última búsqueda: no hacen nuevas consultas. Algunos vídeos no permiten reproducción incrustada. Pantalla completa depende del navegador de APTV. Los subtítulos se solicitan desactivados.</p></section>
+<body>
+<main>
+<header><span class="brand" aria-hidden="true">▶</span><div><h1>YouTube · Audi RS</h1><p>Vídeos con controles sencillos para la rueda MMI</p></div></header>
+<section class="panel" id="searchPanel">
+<h2>⌕ Buscar vídeos o canciones</h2>
+<div class="row"><input id="query" type="search" placeholder="Ej.: Hades66 visualizer" aria-label="Buscar vídeos"><button id="search" class="primary">BUSCAR</button></div>
+<div class="results" id="results" aria-live="polite"></div>
+</section>
+<button id="backResults" hidden>☰ VER RESULTADOS DE BÚSQUEDA</button>
+<section id="playerPanel" class="panel" hidden>
+<div id="theater-on"><div id="video" class="video"><div id="player"></div></div><button id="exitTheater">✕ SALIR DE VISTA AMPLIADA</button></div>
+<div class="actions"><button id="prev">⏮ ANTERIOR</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AMPLIAR VÍDEO</button></div>
+</section>
+<p id="status" class="status" role="status">Busca un vídeo para empezar.</p>
+<details><summary>🔗 Abrir un enlace de YouTube directamente</summary><div class="panel"><div class="row"><input id="url" placeholder="https://youtu.be/..." aria-label="Enlace de YouTube"><button id="load">ABRIR</button></div></div></details>
+<p class="notice">El botón de pantalla completa depende del navegador APTV. YouTube puede limitar vídeos incrustados. Prueba la página con el vehículo estacionado.</p>
 </main>
 <script>
 'use strict';
-const $=id=>document.getElementById(id);
 const API_BASE='https://youtube-server-carplay.onrender.com';
-let ytReady=false,player=null,pending=null,currentID=null,trackIndex=-1,tracks=[];
-const setStatus=s=>$('status').textContent=s;
-function hideResults(){ $('resultsWrap').hidden=true; }
-function showResults(){ $('resultsWrap').hidden=tracks.length===0; $('searchPanel').scrollIntoView({behavior:'smooth',block:'start'}); }
-function idFromURL(s){s=s.trim();if(/^[\w-]{11}$/.test(s))return s;try{const u=new URL(s);if(['youtu.be','www.youtu.be'].includes(u.hostname))return u.pathname.split('/')[1];if(['youtube.com','www.youtube.com','m.youtube.com'].includes(u.hostname)){if(u.pathname==='/watch')return u.searchParams.get('v');return u.pathname.match(/^\/(shorts|embed|live)\/([\w-]{11})/)?.[2]||null}}catch{}return null}
-function play(id,title='',index=-1){if(!/^[\w-]{11}$/.test(id)){setStatus('El identificador del vídeo no es válido.');return}currentID=id;trackIndex=index;hideResults();$('videoTitle').textContent=title||'Vídeo de YouTube';$('empty').hidden=true;$('empty').style.display='none';$('playerPanel').scrollIntoView({behavior:'smooth',block:'start'});if(!ytReady){pending={id,title,index};setStatus('Cargando YouTube…');return}try{if(player&&typeof player.destroy==='function')player.destroy()}catch{}$('player').remove();const node=document.createElement('div');node.id='player';$('video').appendChild(node);player=new YT.Player('player',{width:'100%',height:'100%',videoId:id,playerVars:{autoplay:0,playsinline:1,rel:0,cc_load_policy:0,iv_load_policy:3,origin:location.origin},events:{onReady:()=>setStatus('Vídeo listo. Pulsa ▶ para reproducir.'),onError:e=>setStatus('YouTube no permite reproducir este vídeo aquí (error '+e.data+').'),onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)next(false)}}});}
-function navigate(delta){if(!tracks.length){setStatus('Primero realiza una búsqueda para usar Anterior/Siguiente.');return}let nextIndex=trackIndex+delta;if(trackIndex<0)nextIndex=delta>0?0:tracks.length-1;nextIndex=(nextIndex+tracks.length)%tracks.length;const t=tracks[nextIndex];play(t.id,t.title,nextIndex)}
-function next(auto){navigate(1)}
-function renderResults(){const container=$('results');container.replaceChildren();tracks.forEach((t,index)=>{const btn=document.createElement('button');btn.type='button';btn.className='result';const img=document.createElement('img');img.loading='lazy';img.alt='';img.src=t.thumbnail||'';const text=document.createElement('span');text.className='result-text';const title=document.createElement('strong');title.textContent=t.title;const channel=document.createElement('small');channel.textContent=t.channel||'YouTube';text.append(title,channel);btn.append(img,text);btn.addEventListener('click',()=>play(t.id,t.title,index));container.appendChild(btn)});$('resultsWrap').hidden=!tracks.length}
-async function search(){const query=$('query').value.trim();if(!query){setStatus('Escribe un nombre para buscar.');return}const b=$('search');b.disabled=true;setStatus('Buscando «'+query+'»…');try{const u=new URL('/api/search',API_BASE);u.searchParams.set('q',query);const response=await fetch(u);const json=await response.json();if(!response.ok)throw new Error(json.error||'Error '+response.status);tracks=(json.videos||[]).filter(x=>/^[\w-]{11}$/.test(x.id)).map(x=>({id:x.id,title:x.title||'Vídeo',thumbnail:x.thumbnail,channel:x.channel}));trackIndex=-1;renderResults();setStatus(tracks.length?`${tracks.length} resultados listos. Selecciona un vídeo.`:'No se encontraron vídeos.')}catch(e){setStatus('Error buscando: '+e.message)}finally{b.disabled=false}}
-$('search').onclick=search;$('query').addEventListener('keydown',e=>{if(e.key==='Enter')search()});$('hideResults').onclick=hideResults;$('showResults').onclick=showResults;$('prev').onclick=()=>navigate(-1);$('next').onclick=()=>navigate(1);
-$('load').onclick=()=>{const id=idFromURL($('url').value);if(!id){setStatus('Introduce un enlace válido.');return}play(id,'Vídeo de enlace',-1)};
-$('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if($('video').requestFullscreen)await $('video').requestFullscreen();else setStatus('Este navegador no permite pantalla completa. Prueba AMPLIAR.')}catch{setStatus('APTV ha bloqueado la pantalla completa. Prueba AMPLIAR.')}};
-$('theater').onclick=()=>{$('theater-on').classList.add('expanded');setStatus('Vista ampliada. Pulsa SALIR para volver.')} ;$('exitTheater').onclick=()=>{$('theater-on').classList.remove('expanded');setStatus('Vista normal.')};
-window.onYouTubeIframeAPIReady=()=>{ytReady=true;if(pending){const p=pending;pending=null;play(p.id,p.title,p.index)}};const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';s.onerror=()=>setStatus('No se pudo cargar el reproductor de YouTube.');document.head.append(s);
+const el=id=>document.getElementById(id);
+let ready=false,player=null,pending=null,currentIndex=-1,videos=[],activeId=null;
+const setStatus=message=>{el('status').textContent=message};
+function videoId(value){
+ value=value.trim();if(/^[\w-]{11}$/.test(value))return value;
+ try{const u=new URL(value);if(['youtu.be','www.youtu.be'].includes(u.hostname))return u.pathname.split('/')[1];if(['youtube.com','www.youtube.com','m.youtube.com'].includes(u.hostname)){if(u.pathname==='/watch')return u.searchParams.get('v');return u.pathname.match(/^\/(shorts|embed|live)\/([\w-]{11})/)?.[2]||null}}catch{}
+ return null;
+}
+function hideResults(){el('searchPanel').hidden=true;el('backResults').hidden=false;el('playerPanel').hidden=false;el('playerPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function showResults(){el('searchPanel').hidden=false;el('backResults').hidden=true;el('searchPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function highlight(){document.querySelectorAll('.result').forEach((button,index)=>button.classList.toggle('current',index===currentIndex));}
+function play(id,index=-1){
+ if(!/^[\w-]{11}$/.test(id)){setStatus('Identificador de vídeo inválido.');return;}
+ activeId=id;currentIndex=index;highlight();hideResults();
+ if(!ready){pending={id,index};setStatus('Cargando reproductor de YouTube…');return;}
+ if(player&&typeof player.destroy==='function'){try{player.destroy()}catch(e){}}
+ el('video').innerHTML='<div id="player"></div>';
+ player=new YT.Player('player',{height:'100%',width:'100%',videoId:id,playerVars:{playsinline:1,rel:0,cc_load_policy:0,iv_load_policy:3,origin:location.origin},events:{onReady:()=>setStatus('Vídeo preparado. Pulsa reproducir.'),onError:e=>setStatus('YouTube no permite reproducir este vídeo aquí (error '+e.data+').')}});
+}
+function renderVideos(){
+ const results=el('results');results.replaceChildren();
+ videos.forEach((item,index)=>{
+  const button=document.createElement('button');button.className='result';button.type='button';
+  const img=document.createElement('img');img.alt='';img.loading='lazy';img.src=item.thumbnail||'';
+  const txt=document.createElement('span');txt.className='txt';txt.textContent=item.title||'Vídeo';
+  button.append(img,txt);button.onclick=()=>play(item.id,index);results.append(button);
+ });
+ highlight();
+}
+async function searchVideos(){
+ const q=el('query').value.trim();if(!q){setStatus('Escribe algo que quieras buscar.');return;}
+ const button=el('search');button.disabled=true;setStatus('Buscando «'+q+'»…');el('results').replaceChildren();
+ try{
+  const url=new URL('/api/search',API_BASE);url.searchParams.set('q',q);
+  const response=await fetch(url.toString());const data=await response.json();
+  if(!response.ok)throw new Error(data.error||'Error HTTP '+response.status);
+  videos=(data.videos||[]).filter(item=>/^[\w-]{11}$/.test(item.id));currentIndex=-1;
+  renderVideos();setStatus(videos.length?'Selecciona un vídeo con la rueda MMI.':'No se han encontrado vídeos.');
+ }catch(e){setStatus('Error de búsqueda: '+e.message)}finally{button.disabled=false}
+}
+function jump(step){
+ if(!videos.length){setStatus('Primero busca vídeos para utilizar Anterior/Siguiente.');return;}
+ const index=currentIndex<0?(step>0?0:videos.length-1):(currentIndex+step+videos.length)%videos.length;
+ play(videos[index].id,index);
+}
+el('search').onclick=searchVideos;
+el('query').addEventListener('keydown',event=>{if(event.key==='Enter')searchVideos()});
+el('backResults').onclick=showResults;
+el('prev').onclick=()=>jump(-1);el('next').onclick=()=>jump(1);
+el('load').onclick=()=>{const id=videoId(el('url').value);if(id)play(id);else setStatus('Introduce un enlace válido de YouTube.')};
+el('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(el('video').requestFullscreen)await el('video').requestFullscreen();else setStatus('Este navegador no admite pantalla completa.')}catch(e){setStatus('APTV ha bloqueado pantalla completa. Prueba AMPLIAR VÍDEO.')}};
+el('theater').onclick=()=>el('theater-on').classList.add('expanded');
+el('exitTheater').onclick=()=>el('theater-on').classList.remove('expanded');
+window.onYouTubeIframeAPIReady=()=>{ready=true;if(pending){const {id,index}=pending;pending=null;play(id,index)}};
+const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>setStatus('No se ha podido cargar el reproductor de YouTube.');document.head.append(script);
 </script>
-</body></html>
+</body>
+</html>
+
 
