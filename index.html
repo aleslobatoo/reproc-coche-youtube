@@ -194,11 +194,41 @@ el('theater').onclick=()=>el('theater-on').classList.add('expanded');
 el('exitTheater').onclick=()=>el('theater-on').classList.remove('expanded');
 window.onYouTubeIframeAPIReady=()=>{ready=true;if(pending){const {id,index}=pending;pending=null;play(id,index)}};
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>setStatus('No se ha podido cargar el reproductor de YouTube.');document.head.append(script);
+
+<!-- MEDIDOR DE RESOLUCIÓN CARPLAY -->
+<div style="
+  position:fixed;
+  bottom:10px;
+  right:10px;
+  z-index:99999;
+">
+  <button onclick="medirCarPlay()" style="
+    background:#b91c32;
+    color:white;
+    padding:12px;
+    border:1px solid #ff5268;
+    border-radius:10px;
+    font-weight:bold;
+  ">
+    📐 MEDIR PANTALLA
+  </button>
+</div>
+
+<script>
+function medirCarPlay() {
+  const info =
+    "Pantalla: " + screen.width + " x " + screen.height +
+    "\nVentana: " + window.innerWidth + " x " + window.innerHeight +
+    "\nArea visible: " +
+    document.documentElement.clientWidth + " x " +
+    document.documentElement.clientHeight +
+    "\nEscala: " + window.devicePixelRatio;
+
+  alert(info);
+}
 </script>
+
 </body>
-</html>
-
-
 </html>
 
 
