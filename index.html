@@ -45,10 +45,13 @@ button:disabled{opacity:.55;cursor:wait}
 .notice{border-left:3px solid var(--rs);background:var(--notice-bg);color:var(--sub);padding:10px;border-radius:6px;font-size:.82rem}
 details summary{cursor:pointer;padding:8px 0;font-weight:700}
 #searchPanel[hidden],#backResults[hidden],#playerPanel[hidden]{display:none!important}
-#theater-on.expanded{position:fixed;inset:0;background:#000;z-index:100;display:flex;flex-direction:column;justify-content:center;padding:0}
-#theater-on.expanded .video{width:100vw;height:100vh;height:100dvh;aspect-ratio:auto;border:0;border-radius:0}
-#exitTheater{display:none;position:fixed;right:12px;bottom:12px;z-index:101}
+/* Pantalla completa segura: respeta 16:9 y permite salir con la rueda MMI. */
+#theater-on.expanded{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;background:#000;z-index:1000;display:flex;align-items:center;justify-content:center;padding:0;overflow:hidden}
+#theater-on.expanded .video{flex:none;width:100%;height:auto;max-width:calc(100dvh * 16 / 9);max-height:100dvh;aspect-ratio:16/9;border:0;border-radius:0;background:#000}
+#theater-on.expanded .video iframe{width:100%;height:100%;object-fit:contain}
+#exitTheater{display:none;position:fixed;top:6px;right:6px;bottom:auto;z-index:1002;min-height:38px;padding:7px 11px;border:2px solid #fff;border-radius:9px;background:var(--rs);color:#fff;font-size:12px;box-shadow:0 2px 12px #000;cursor:pointer}
 #theater-on.expanded #exitTheater{display:block}
+body.carplay-expanded{overflow:hidden}
 @media(max-width:580px){main{padding:11px}.row{flex-direction:column}.result img{flex-basis:95px;width:95px;height:56px}button{font-size:.91rem}.actions{gap:7px}.actions{grid-template-columns:repeat(3,minmax(0,1fr))}.actions button{padding:8px 5px;font-size:.75rem}}
 
 /* Efectos Audi S-Line / AMG: selección MMI, brillo y pulsación */
@@ -87,12 +90,12 @@ input:focus{border-color:var(--rs2);box-shadow:0 0 0 2px var(--aura),0 0 15px va
 </section>
 <button id="backResults" hidden>☰ VER RESULTADOS DE BÚSQUEDA</button>
 <section id="playerPanel" class="panel" hidden>
-<div id="theater-on"><div id="video" class="video"><div id="player"></div></div><button id="exitTheater">✕ SALIR DE VISTA AMPLIADA</button></div>
-<div class="actions"><button id="prev">⏮ ANTERIOR</button><button id="pause" aria-label="Pausar o reanudar vídeo">⏯ PAUSA / PLAY</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AMPLIAR VÍDEO</button><button id="backToSearch">⌕ BUSCAR</button></div>
+<div id="theater-on"><div id="video" class="video"><div id="player"></div></div><button id="exitTheater" type="button" aria-label="Salir de pantalla completa">✕ SALIR</button></div>
+<div class="actions"><button id="prev">⏮ ANTERIOR</button><button id="pause" aria-label="Pausar o reanudar vídeo">⏯ PAUSA / PLAY</button><button id="next">SIGUIENTE ⏭</button><button id="fullscreen">⛶ PANTALLA COMPLETA</button><button id="theater">▣ AJUSTAR A CARPLAY</button><button id="backToSearch">⌕ BUSCAR</button></div>
 </section>
 <p id="status" class="status" role="status">Busca un vídeo para empezar.</p>
 <details><summary>🔗 Abrir un enlace de YouTube directamente</summary><div class="panel"><div class="row"><input id="url" placeholder="https://youtu.be/..." aria-label="Enlace de YouTube"><button id="load">ABRIR</button></div></div></details>
-<p class="notice">El botón de pantalla completa depende del navegador APTV. YouTube puede limitar vídeos incrustados. Prueba la página con el vehículo estacionado.</p>
+<p class="notice">PANTALLA COMPLETA y AJUSTAR A CARPLAY mantienen el vídeo en 16:9 y muestran ✕ SALIR. Evita el icono de pantalla completa del propio YouTube: APTV puede abrir un reproductor nativo que no controlamos. Utiliza el vídeo solo con el vehículo estacionado.</p>
 </main>
 <script>
 'use strict';
@@ -189,46 +192,30 @@ el('pause').onclick=()=>{
  }catch(e){setStatus('El reproductor no admite este control.')}
 };
 el('load').onclick=()=>{const id=videoId(el('url').value);if(id)play(id);else setStatus('Introduce un enlace válido de YouTube.')};
-el('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(el('video').requestFullscreen)await el('video').requestFullscreen();else setStatus('Este navegador no admite pantalla completa.')}catch(e){setStatus('APTV ha bloqueado pantalla completa. Prueba AMPLIAR VÍDEO.')}};
-el('theater').onclick=()=>el('theater-on').classList.add('expanded');
-el('exitTheater').onclick=()=>el('theater-on').classList.remove('expanded');
+// No usar requestFullscreen(): el navegador de APTV puede capturar la pantalla
+// e impedir que el usuario vuelva a pulsar los controles de nuestra página.
+function toggleCarPlayView(force){
+ const expanded=el('theater-on').classList.contains('expanded');
+ const show=typeof force==='boolean'?force:!expanded;
+ el('theater-on').classList.toggle('expanded',show);
+ document.body.classList.toggle('carplay-expanded',show);
+ el('fullscreen').setAttribute('aria-pressed',String(show));
+ el('theater').setAttribute('aria-pressed',String(show));
+ if(show){el('exitTheater').focus({preventScroll:true});}
+ else{el('fullscreen').focus({preventScroll:true});}
+}
+el('fullscreen').onclick=()=>toggleCarPlayView();
+el('theater').onclick=()=>toggleCarPlayView();
+el('exitTheater').onclick=()=>toggleCarPlayView(false);
+document.addEventListener('keydown',event=>{
+ if((event.key==='Escape'||event.key==='Backspace')&&el('theater-on').classList.contains('expanded')){
+  event.preventDefault();toggleCarPlayView(false);
+ }
+});
 window.onYouTubeIframeAPIReady=()=>{ready=true;if(pending){const {id,index}=pending;pending=null;play(id,index)}};
 const script=document.createElement('script');script.src='https://www.youtube.com/iframe_api';script.onerror=()=>setStatus('No se ha podido cargar el reproductor de YouTube.');document.head.append(script);
 </script>
-<!-- MEDIDOR DE RESOLUCIÓN CARPLAY -->
-<div style="
-  position:fixed;
-  bottom:10px;
-  right:10px;
-  z-index:99999;
-">
-  <button onclick="medirCarPlay()" style="
-    background:#b91c32;
-    color:white;
-    padding:12px;
-    border:1px solid #ff5268;
-    border-radius:10px;
-    font-weight:bold;
-  ">
-    📐 MEDIR PANTALLA
-  </button>
-</div>
 
-<script>
-function medirCarPlay() {
-  const info =
-    "Pantalla: " + screen.width + " x " + screen.height +
-    "\nVentana: " + window.innerWidth + " x " + window.innerHeight +
-    "\nArea visible: " +
-    document.documentElement.clientWidth + " x " +
-    document.documentElement.clientHeight +
-    "\nEscala: " + window.devicePixelRatio;
-
-  alert(info);
-}
-</script>
 
 </body>
 </html>
-
-
